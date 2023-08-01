@@ -2,12 +2,16 @@
 
 ## users テーブル　
 
-| Column             | Type   | Options     |　
-| ------------------ | ------ | ----------- |　
-| name               | string | null: false |　
-| email              | string | null: false |　
-| encrypted_password | string | null: false |　
-| birthday           | string | null: false |　
+| Column                 | Type   | Options                  |　
+| ------------------     | ------ | -----------              |　
+| nickname               | string | null: false              |　
+| email                  | string | null: false ,unique: true|　
+| encrypted_password     | string | null: false              |　
+| first_name             | string | null: false              |
+| last_name              | string | null: false              |
+| first_name_kana        | string | null: false              |　
+| last_name_kana         | string | null: false              |
+| birthday               | date   | null: false              |　
 
 - has_many :items　
 - has_many :purchases　
@@ -15,19 +19,17 @@
 
 ## items テーブル　
 
-| Column   | Type       | Options                        |　
-| ------   | ------     | -----------                    |　
-| user     | references | null: false, foreign_key: true |　
-| image    | text       | null: false                    |　
-| name     | string     | null: false                    |　
-| detail   | string     | null: false                    |　
-| category | string     | null: false                    |　
-| ship fee | string     | null: false                    |　
-| category | string     | null: false                    |　
-| region   | string     | null: false                    |　
-| ship days| string     | null: false                    |　
-| status   | string     | null: false                    |　
-| price    | int        | null: false                    |　
+| Column      | Type       | Options                        |　
+| ------      | ------     | -----------                    |　
+| user        | references | null: false, foreign_key: true |　
+| name        | string     | null: false                    |　
+| detail      | text       | null: false                    |　
+| category_id | integer    | null: false                    |
+| ship_fee_id | integer    | null: false                    |
+| region_id   | integer    | null: false                    |
+| ship_days_id| integer    | null: false                    |
+| status_id   | integer    | null: false                    |
+| price       | integer    | null: false                 |　
 
 ### Association　
 
@@ -35,7 +37,7 @@
 - has_one :purchase　
 
 
-## Purchases テーブル　
+## purchases テーブル　
 
 | Column | Type       | Options                        |　　
 | ------ | ---------- | ------------------------------ |　　
@@ -52,20 +54,20 @@
 
 ## addresses テーブル　
 
-| Column     | Type       | Options                        |　
-| ------     | ---------- | ------------------------------ |　
-| user       | references | null: false, foreign_key: true |　
-| postcode   | string     | null: false                    |　
-| prefecture | string     | null: false                    |　
-| city       | string     | null: false                    |　
-| street     | string     | null: false                    |　
-| building   | string     |                                |　
-| phone      | string     | null: false                    |
+| Column        | Type       | Options                        |　
+| ------        | ---------- | ------------------------------ |　
+| purchase      | references | null: false, foreign_key: true |　
+| postcode      | string     | null: false                    |　
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |　
+| street        | string     | null: false                    |　
+| building      | string     |                                |　
+| phone         | string     | null: false                    |
 　
 
 ### Association　
 
-- has_one :purchase　
+- belongs_to :purchase　
 
 
 
