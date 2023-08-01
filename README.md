@@ -27,7 +27,7 @@
 | category_id | integer    | null: false                    |
 | ship_fee_id | integer    | null: false                    |
 | region_id   | integer    | null: false                    |
-| ship_days_id| integer    | null: false                    |
+| ship_day_id | integer    | null: false                    |
 | status_id   | integer    | null: false                    |
 | price       | integer    | null: false                 |　
 
@@ -58,7 +58,7 @@
 | ------        | ---------- | ------------------------------ |　
 | purchase      | references | null: false, foreign_key: true |　
 | postcode      | string     | null: false                    |　
-| prefecture_id | integer    | null: false                    |
+| region_id     | integer    | null: false                    |
 | city          | string     | null: false                    |　
 | street        | string     | null: false                    |　
 | building      | string     |                                |　
