@@ -7,11 +7,10 @@
 | name               | string | null: false |
 | email              | string | null: false |
 | encrypted_password | string | null: false |
-| birthday           | string | null: false |
 
-- has_many :items
+- has_many :room_users
+- has_many :items, through: :room_users
 - has_many :purchases
-- has_one :adresses
 
 
 ## items テーブル
@@ -19,46 +18,56 @@
 | Column | Type   | Options     |
 | ------ | ------ | ----------- |
 | name   | string | null: false |
-| image  | text   | null: false |
 | detail | string | null: false |
 | price  | int    | null: false |
-
+| image  | text   | null: false |
 ### Association
 
 - belongs_to :user
+- has_many :room_users
 - has_one :purchases
 
 
-## Purchases テーブル
+
+## room_users テーブル
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
 | user   | references | null: false, foreign_key: true |
-| adress | references | null: false, foreign_key: true |
+| room   | references | null: false, foreign_key: true |
 
 ### Association
 
+- belongs_to :room
 - belongs_to :user
-- has_one  :items
-- has_one  :adresses
 
+
+
+## purchases テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| content | string     |                                |
+| user    | references | null: false, foreign_key: true |
+| items   | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :
+- belongs_to :user
+- belongs_to :user
 
 
 ## addresses テーブル
 
-| Column    | Type       | Options                        |
-| ------    | ---------- | ------------------------------ |
-| user      | references | null: false, foreign_key: true |
-| postcode  | int        | null: false                    |
-| prefecture| string     | null: false                    |
-| city      | string     | null: false                    |
-| street    | string     | null: false                    |
-| building  | string     | null: false                    |
-| phone     | int        | null: false                    |
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| room   | references | null: false, foreign_key: true |
 
 ### Association
 
 - has_one :purchases
-- has_one :users
-
+- has_one :user
+- has many :items
 
