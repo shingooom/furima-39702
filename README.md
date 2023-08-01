@@ -1,73 +1,75 @@
-# テーブル設計
+# テーブル設計　
 
-## users テーブル
-
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| name               | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-
-- has_many :room_users
-- has_many :items, through: :room_users
-- has_many :purchases
+## users テーブル　
 
 
-## items テーブル
+| Column                 | Type   | Options                  |　
+| ------------------     | ------ | -----------              |　
+| nickname               | string | null: false              |　
+| email                  | string | null: false ,unique: true|　
+| encrypted_password     | string | null: false              |　
+| first_name             | string | null: false              |
+| last_name              | string | null: false              |
+| first_name_kana        | string | null: false              |　
+| last_name_kana         | string | null: false              |
+| birthday               | date   | null: false              |　
 
-| Column | Type   | Options     |
-| ------ | ------ | ----------- |
-| name   | string | null: false |
-| detail | string | null: false |
-| price  | int    | null: false |
-| image  | text   | null: false |
-### Association
-
-- belongs_to :user
-- has_many :room_users
-- has_one :purchases
-
-
-
-## room_users テーブル
-
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| user   | references | null: false, foreign_key: true |
-| room   | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :room
-- belongs_to :user
+- has_many :items　
+- has_many :purchases　
 
 
+## items テーブル　
 
-## purchases テーブル
+| Column      | Type       | Options                        |　
+| ------      | ------     | -----------                    |　
+| user        | references | null: false, foreign_key: true |　
+| name        | string     | null: false                    |　
+| detail      | text       | null: false                    |　
+| category_id | integer    | null: false                    |
+| ship_fee_id | integer    | null: false                    |
+| region_id   | integer    | null: false                    |
+| ship_day_id | integer    | null: false                    |
+| status_id   | integer    | null: false                    |
+| price       | integer    | null: false                 |　
 
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| content | string     |                                |
-| user    | references | null: false, foreign_key: true |
-| items   | references | null: false, foreign_key: true |
+### Association　
 
-### Association
-
-- belongs_to :
-- belongs_to :user
-- belongs_to :user
+- belongs_to :user　
+- has_one :purchase　
 
 
-## addresses テーブル
+## purchases テーブル　
 
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| user   | references | null: false, foreign_key: true |
-| room   | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |　　
+| ------ | ---------- | ------------------------------ |　　
+| user   | references | null: false, foreign_key: true |　
+| item   | references | null: false, foreign_key: true |　
 
-### Association
+### Association　
 
-- has_one :purchases
-- has_one :user
-- has many :items
+- belongs_to :user　
+- belongs_to :item　
+- has_one  :address　
 
+
+
+## addresses テーブル　
+
+| Column        | Type       | Options                        |　
+| ------        | ---------- | ------------------------------ |　
+| purchase      | references | null: false, foreign_key: true |　
+| postcode      | string     | null: false                    |　
+| region_id     | integer    | null: false                    |
+| city          | string     | null: false                    |　
+| street        | string     | null: false                    |　
+| building      | string     |                                |　
+| phone         | string     | null: false                    |
+　
+
+### Association　
+
+- belongs_to :purchase　
+
+
+
+　　
