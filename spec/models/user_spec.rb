@@ -43,6 +43,18 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Last name is invalid. Input full-width characters.')
       end
 
+      it 'first_name_kanaが空では登録できないこと' do
+        @user.first_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name kana can't be blank", "First name kana is invalid. Input full-width katakana characters.")
+      end
+      
+      it 'last_name_kanaが空では登録できないこと' do
+        @user.last_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name kana can't be blank", "Last name kana is invalid. Input full-width katakana characters.")
+      end
+
       it 'first_name_kanaがカタカナでないと登録できないこと' do
         @user.first_name_kana = 'あいうえお'
         @user.valid?
@@ -87,14 +99,20 @@ RSpec.describe User, type: :model do
       end
 
       it 'パスワードは、6文字以上での入力が必須であること' do
-        @user.password = '12345'
-        @user.password_confirmation = '12345'
+        @user.password = 'abc12'
+        @user.password_confirmation = 'abc12'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
 
       it 'パスワードが英数字混合でないと登録できないこと' do
         @user.password = 'abcdef'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid. Include both letters and numbers.')
+      end
+
+      it 'パスワードが数字のみの場合登録できないこと' do
+        @user.password = '123456'
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is invalid. Include both letters and numbers.')
       end
