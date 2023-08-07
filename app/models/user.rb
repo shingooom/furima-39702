@@ -12,7 +12,9 @@ class User < ApplicationRecord
   validates :birthday, presence: true
 
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
+  VALID_ASCII_REGEX = /\A[\x21-\x7E]+\z/.freeze
   validates_format_of :password, with: VALID_PASSWORD_REGEX, message: 'is invalid. Include both letters and numbers.'
+  validates_format_of :password, with: VALID_ASCII_REGEX, message: 'is invalid. Input half-width characters.'
 end
 
 

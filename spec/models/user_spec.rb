@@ -118,9 +118,16 @@ RSpec.describe User, type: :model do
       end
   
       it 'パスワードとパスワード（確認）は、値の一致が必須であること' do
-        @user.password_confirmation = '1234567'
+        @user.password_confirmation = '1234abc'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+
+      it 'パスワードが全角文字では登録できない' do
+        @user.password = '１２３４ABC'
+        @user.password_confirmation = '１２３４ABC'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid. Input half-width characters.')
       end
     end
   end
