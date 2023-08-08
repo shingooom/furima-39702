@@ -30,7 +30,7 @@
 | region_id   | integer    | null: false                    |
 | ship_day_id | integer    | null: false                    |
 | status_id   | integer    | null: false                    |
-| price       | integer    | null: false                 |　
+| price       | integer    | null: false                    |　
 
 ### Association　
 
