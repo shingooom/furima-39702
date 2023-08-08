@@ -19,6 +19,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
 
+      it 'userが存在しなければ登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
+
       it 'nameが空では登録できない' do
         @item.name = ''
         @item.valid?
@@ -84,7 +90,7 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
-      
+
     end
   end
 end
