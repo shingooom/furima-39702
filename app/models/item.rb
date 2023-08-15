@@ -6,7 +6,6 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one :purchase
 
-  belongs_to :user
   belongs_to :category
   belongs_to :status
   belongs_to :ship_fee
