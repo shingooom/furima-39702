@@ -8,7 +8,7 @@
     </h1>
     <%# 購入内容の表示 %>
     <div class='buy-item-info'>
-      <%= image_tag "item-sample.png", class: 'buy-item-img' %>
+      <%= image_tag @item.image, class: 'buy-item-img' %>
       <div class='buy-item-right-content'>
         <h2 class='buy-item-text'>
           <%= @item.name %>
@@ -36,25 +36,34 @@
 
     <%= form_with model: @purchase_address, url: item_purchases_path, data: { turbo: "false" }, id: 'charge-form', class: 'transaction-form-wrap', local: true do |f| %>
     <%# カード情報の入力 %>
-    <div class='credit-card-form'>
-      <h1 class='info-input-haedline'>
-        クレジットカード情報入力
-      </h1>
-    </div>
-    <div class='form-wrap'>
-      <p>カード番号</p>
-      <div id="number-form" class="input-default"></div>
-    </div>
-    <div class='form-wrap'>
-      <p>期限</p>
-      <div id="expiry-form" class="input-default"></div>
-    </div>
-    <div class='form-wrap'>
-      <p>カード背面4桁もしくは3桁の番号</p>
-      <div id="cvc-form" class="input-default"></div>
-    </div>
-    <input type="hidden" name="token" id="token">
-    <%# /カード情報の入力 %>
+<div class='credit-card-form'>
+  <h1 class='info-input-haedline'>
+    クレジットカード情報入力
+  </h1>
+</div>
+<div class='form-group'>
+  <div class='form-text-wrap'>
+    <label class="form-text">カード番号</label>
+    <span class="indispensable">必須</span>
+  </div>
+  <div id="number-form" class="input-default"></div>
+</div>
+<div class='form-group'>
+  <div class='form-text-wrap'>
+    <label class="form-text">期限</label>
+    <span class="indispensable">必須</span>
+  </div>
+  <div id="expiry-form" class="input-default"></div>
+</div>
+<div class='form-group'>
+  <div class='form-text-wrap'>
+    <label class="form-text">カード背面4桁もしくは3桁の番号</label>
+    <span class="indispensable">必須</span>
+  </div>
+  <div id="cvc-form" class="input-default"></div>
+</div>
+<input type="hidden" name="token" id="token">
+<%# /カード情報の入力 %>
 
     <%# 配送先の入力 %>
     <div class='shipping-address-form'>
