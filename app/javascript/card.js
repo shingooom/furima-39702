@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function() {
+  pay();
+});
+
 const pay = () => {
 
   const publicKey = gon.public_key

@@ -6,7 +6,7 @@ class PurchaseAddress
     validates :user_id
     validates :item_id
     validates :postcode, format: { with: /\A\d{3}-\d{4}\z/, message: 'must be in the format XXX-XXXX' }
-    validates :region_id, numericality: { other_than: 0, message: 'Select a region' }
+    validates :region_id, numericality: { other_than: 1, message: 'Select a region' }
     validates :city
     validates :street
     validates :phone, format: { with: /\A\d{10,11}\z/, message: 'must be 10 or 11 digits long' }
